@@ -1,0 +1,24 @@
+<canvas id="c" width="40" height="30"></canvas>
+<table id="td" style="border-collapse:collapse;"></table>
+<script>
+var ctx = c.getContext('2d');
+ctx.beginPath();
+ctx.arc(50, 50, 60, 60, Math.PI*2);
+ctx.strokeStyle = "green"
+ctx.fillStyle = "red"
+ctx.fill()
+ctx.stroke();
+var id = ctx.getImageData(0, 0, c.width, c.height);
+var data = id.data;
+alert(data.length);
+t=""
+t +='<tr>'
+for (var i = 0; i < data.length; i += 4) {
+  if (i % (4*c.width) == 0) {
+    t+='</tr><tr>'
+  }
+  t += "<td style='background:rgb(" + data[i] + ", " + data[i+1] + "," + data[i+2] + ")'></td>";
+}
+t.innerHTML+='</tr>'
+td.innerHTML = t
+</script>
